@@ -4,6 +4,13 @@ from entrepreneur.models import Usuario
 
 
 class UserListSerializers(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    email = serializers.CharField(max_length=100)
+    full_name = serializers.CharField(max_length=100)
+    identify = serializers.CharField(max_length=10)
+    status = serializers.CharField(max_length=1)
+    rol = serializers.IntegerField()
+
     class Meta:
         model = Usuario
         exclude = ('create_time', 'last_login', 'is_admin')
@@ -36,12 +43,3 @@ class UserSerializer(serializers.ModelSerializer):
         update_user.set_password(validated_data['password'])
         update_user.save()
         return update_user
-
-
-class UserTokenSerializer(serializers.ModelSerializer):
-    """
-    Habilita la creación de Tokens de usuarios
-    """
-    class Meta:
-        model = Usuario
-        exclude = ('create_time', 'last_login')

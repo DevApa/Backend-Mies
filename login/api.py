@@ -6,8 +6,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from login.serializers import LogoutSerializer
-from userapi.serializers import UserTokenSerializer
+from login.serializers import LogoutSerializer, UserTokenSerializer
 
 
 class Login(ObtainAuthToken):

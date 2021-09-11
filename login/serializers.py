@@ -62,12 +62,32 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 class UserTokenSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(max_length=255, min_length=3)
+    names = serializers.CharField(max_length=255, min_length=6, read_only=True)
+    token = serializers.CharField(max_length=255, min_length=6, read_only=True)
     class Meta:
         model = Usuario
         exclude = ['create_time', 'last_login', 'is_admin', 'identify', 'password']
 
 
 class LogoutSerializer(serializers.Serializer):
+
     class Meta:
         model = Usuario
         fields = ['id']
+
+
+# class UserTokenSerializer(serializers.ModelSerializer):
+#     """
+#     Habilita la creación de Tokens de usuarios
+#     """
+#
+#     class Meta:
+#         model = Usuario
+#         exclude = ('create_time', 'last_login')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        exclude = ['create_time', 'last_login', 'is_admin', 'password']
